@@ -1,0 +1,9 @@
+# Local original artwork and exports are kept outside the web repository.
+highcards/
+*.zip
+*.tar.gz
+.env
+.env.*
+node_modules/
+.DS_Store
+Thumbs.db

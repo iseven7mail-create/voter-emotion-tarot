@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#c7e1ef">
+  <meta name="description" content="選舉聲音很多，你的心怎麼說？聽過那麼多聲音，你最在意什麼？用選民情緒牌整理感受，為自己的判斷停一拍。">
+  <title>選民情緒塔羅｜選舉聲音很多，你的心怎麼說？</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23c7e1ef'/%3E%3Crect x='6' y='6' width='52' height='52' rx='8' fill='none' stroke='%23a3874c' stroke-width='2'/%3E%3Cpath d='M32 10l5 16 17 6-17 6-5 16-5-16-17-6 17-6z' fill='%23a3874c'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preload" as="image" type="image/webp" href="cards/05-cerato.webp" fetchpriority="high">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <button class="brand" type="button" data-action="home" aria-label="選民情緒塔羅，回到首頁">
+        <span class="brand-flower" aria-hidden="true">✿</span>
+        <span>選民情緒塔羅</span>
+      </button>
+      <div class="header-right"><span class="edition">VOTER EMOTION TAROT · 38 CARDS</span></div>
+    </header>
+
+    <main id="app" class="app-frame" aria-live="polite"></main>
+
+    <footer class="site-footer">
+      <span>✦ &nbsp; 選對的人，做對的事 &nbsp; ✦</span>
+      <p>牌卡陪你整理感受，不替你判斷立場或決定選票。書寫內容只留在本次瀏覽器操作。</p>
+    </footer>
+  </div>
+
+  <dialog id="zoomDialog" class="modal zoom-modal" aria-label="放大牌卡">
+    <button type="button" class="icon-button zoom-close" data-action="close-zoom" aria-label="關閉放大牌卡">✕</button>
+    <img id="zoomImage" decoding="async" alt="">
+  </dialog>
+
+  <script src="cards-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
