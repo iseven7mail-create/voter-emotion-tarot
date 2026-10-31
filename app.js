@@ -78,20 +78,19 @@
   function fullAdvice(card) { return `${card.advice1}${card.advice2}`; }
   function nextStep(card) { return card.nextStep; }
   function judgmentGuide() {
-    return `<section class="judgment-guide" aria-labelledby="judgmentTitle"><h2 id="judgmentTitle">準備好時，再慢慢判斷</h2><ol>${judgmentSteps.map(([title, text]) => `<li><strong>${esc(title)}</strong><p>${esc(text)}</p></li>`).join('')}</ol><p class="helper">這是給自己的提醒，不是冷靜程度或判斷能力的測驗。現在先休息也可以。</p></section>`;
+    return `<section class="judgment-guide" aria-labelledby="judgmentTitle"><h2 id="judgmentTitle">準備好時，再慢慢判斷</h2><ol>${judgmentSteps.map(([title, text], index) => `<li><strong>${esc(title)}</strong><p>${esc(text)}</p>${index === 1 ? candidateGuide() : ''}</li>`).join('')}</ol><p class="helper">這是給自己的提醒，不是冷靜程度或判斷能力的測驗。現在先休息也可以。</p></section>`;
   }
   function candidateGuide() {
-    return `<section class="judgment-guide candidate-guide" aria-labelledby="candidateTitle">
-      <h2 id="candidateTitle">看見形象，也回看候選人的紀錄</h2>
+    return `<div class="candidate-guide">
+      <h3>看見形象，也回看候選人的紀錄</h3>
       <p class="candidate-intro">選舉形象可以被塑造；理解一個人的本質，需要回看長期的言行、實際選擇與做事方式。</p>
-      <ol>
-        <li><strong>回顧理念：他重視什麼？</strong><p>找候選人過去與現在的完整說法，看看核心價值是否一致；若立場改變，是否清楚交代理由？</p></li>
-        <li><strong>檢視政見：準備怎麼做？</strong><p>閱讀選舉公報、政見全文與完整政見發表或辯論。除了口號，也看做法、預算、時程、職權與取捨，想想承諾是否可行。</p></li>
-        <li><strong>回看經歷：以前怎麼做？</strong><p>查證學經歷、過往工作與公共服務紀錄；曾任公職者，可再看施政、提案、表決與承諾落實情形。遇到爭議，也一起看原始資料、當事人回應與後續處理。</p></li>
-        <li><strong>參考網路討論：哪些值得查證？</strong><p>聽聽不同立場的提問，但不把聲量、按讚數或剪輯片段當成結論。追查出處、日期與完整脈絡，區分事實、評論與傳聞，再對照可信的獨立來源。</p></li>
-      </ol>
-      <p class="candidate-reminder">用同一套標準比較每位候選人，寫下你重視的議題、支持的理由與還待查證的問題。形象之外，讓紀錄與證據幫助你做自己的決定。</p>
-    </section>`;
+      <dl>
+        <dt>回顧理念：他重視什麼？</dt><dd>找候選人過去與現在的完整說法，看看核心價值是否一致；若立場改變，是否清楚交代理由？</dd>
+        <dt>檢視政見：準備怎麼做？</dt><dd>閱讀選舉公報、政見全文與完整政見發表或辯論。除了口號，也看做法、預算、時程、職權與取捨，想想承諾是否可行。</dd>
+        <dt>回看經歷：以前怎麼做？</dt><dd>查證學經歷、過往工作與公共服務紀錄；曾任公職者，可再看施政、提案、表決與承諾落實情形。遇到爭議，也一起看原始資料、當事人回應與後續處理。</dd>
+        <dt>參考網路討論：哪些值得查證？</dt><dd>聽聽不同立場的提問，但不把聲量、按讚數或剪輯片段當成結論。追查出處、日期與完整脈絡，區分事實、評論與傳聞，再對照可信的獨立來源。</dd>
+      </dl>
+    </div>`;
   }
   function innerVoice(card) { return `${card.note1}${card.note2}`; }
   function resolvedAction() {
@@ -165,7 +164,6 @@
     return flow(`<div class="result-heading"><p class="eyebrow">YOUR MOMENT CARD</p><h1 tabindex="-1" id="stageTitle">謝謝你，為自己的反應停了一拍。</h1><p>不用評分，也不必逼自己立刻平靜。這是一張只屬於此刻的回顧卡。</p></div>
       <div class="result-card" id="resultCard"><img width="958" height="1642" decoding="async" src="${cardPath(card)}" alt="${esc(card.zh)}牌面"><div class="result-copy"><p class="eyebrow">選民情緒塔羅 · CARD ${String(card.number).padStart(2, '0')}</p><h2>${esc(card.zh)}</h2><blockquote>${esc(encouragements[card.number])}</blockquote>${resultLine('我對什麼不安', reflection)}${resultLine('給這個情緒的建議', nextStep(card))}${resultLine('我選的小行動', state.actionChoice === 'card' ? '試試上面給這個情緒的建議。' : resolvedAction())}<p class="tagline">選對的人，做對的事 ✦</p></div></div>
       ${judgmentGuide()}
-      ${candidateGuide()}
       <div class="flow-actions result-actions"><button type="button" class="ghost-button" data-action="back">← 返回選行動</button><button type="button" class="primary-button" data-action="download">下載回顧卡 PNG <span aria-hidden="true">↓</span></button><button type="button" class="secondary-button" data-action="restart">再走一次 ↺</button></div><p id="downloadStatus" class="helper" role="status">回顧卡只在你的裝置上產生，不會上傳反思文字。</p>`);
   }
   function render(options = {}) {

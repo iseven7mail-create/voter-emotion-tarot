@@ -23,6 +23,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 .app-frame{max-width:1260px;margin:0 auto;min-height:690px}
 .site-footer{max-width:1260px;margin:0 auto;border-top:1px solid rgba(126,101,56,.47);text-align:center;padding:20px 8px 0;color:var(--gold-dark);font-family:'Noto Serif TC',serif;font-size:13px;letter-spacing:.15em}
 .site-footer p{font-family:'Noto Sans TC',sans-serif;color:var(--muted);font-size:11px;letter-spacing:.02em;margin:10px 0 0}
+.footer-links{display:flex;justify-content:center;gap:12px 24px;flex-wrap:wrap;margin-top:18px;letter-spacing:.03em}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px;padding:8px 10px;color:var(--gold-dark);text-underline-offset:5px;font-size:14px}
+.footer-links a:hover{color:var(--red)}
 
 .corner{position:absolute;color:var(--gold);font-size:32px;line-height:1;pointer-events:none}.corner.tl{top:8px;left:7px}.corner.tr{top:8px;right:7px}.corner.bl{bottom:5px;left:7px}.corner.br{bottom:5px;right:7px}
 .screen{animation:arrive .38s ease both;position:relative}
@@ -129,8 +132,11 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 .judgment-guide h2{font-family:'Noto Serif TC',serif;font-size:22px;margin:0 0 14px}
 .judgment-guide ol{padding-left:24px;margin:0}.judgment-guide li+li{margin-top:14px}
 .judgment-guide strong{color:var(--gold-dark)}.judgment-guide li p{margin:3px 0 0;font-size:15px}
-.candidate-intro{margin:0 0 18px;font-size:16px;color:var(--red);font-family:'Noto Serif TC',serif}
-.candidate-reminder{border-top:1px solid var(--gold);padding-top:15px;margin:20px 0 0;font-size:15px}
+.candidate-guide{margin:18px 0 20px;padding-left:16px;border-left:2px solid var(--gold)}
+.candidate-guide h3{font-family:'Noto Serif TC',serif;font-size:19px;margin:0 0 10px}
+.judgment-guide .candidate-intro{margin:0 0 16px;color:var(--red);font-family:'Noto Serif TC',serif}
+.candidate-guide dl{margin:0;font-size:15px}.candidate-guide dt{font-weight:700;color:var(--gold-dark)}
+.candidate-guide dd{margin:4px 0 16px}.candidate-guide dd:last-child{margin-bottom:0}
 .result-card{align-items:start}.result-copy{min-width:0}
 
 dialog.modal{border:1px solid var(--gold-dark);background:var(--paper);color:var(--ink);box-shadow:0 22px 70px rgba(0,0,0,.28)}
