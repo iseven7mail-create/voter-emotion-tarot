@@ -80,6 +80,19 @@
   function judgmentGuide() {
     return `<section class="judgment-guide" aria-labelledby="judgmentTitle"><h2 id="judgmentTitle">準備好時，再慢慢判斷</h2><ol>${judgmentSteps.map(([title, text]) => `<li><strong>${esc(title)}</strong><p>${esc(text)}</p></li>`).join('')}</ol><p class="helper">這是給自己的提醒，不是冷靜程度或判斷能力的測驗。現在先休息也可以。</p></section>`;
   }
+  function candidateGuide() {
+    return `<section class="judgment-guide candidate-guide" aria-labelledby="candidateTitle">
+      <h2 id="candidateTitle">看見形象，也回看候選人的紀錄</h2>
+      <p class="candidate-intro">選舉形象可以被塑造；理解一個人的本質，需要回看長期的言行、實際選擇與做事方式。</p>
+      <ol>
+        <li><strong>回顧理念：他重視什麼？</strong><p>找候選人過去與現在的完整說法，看看核心價值是否一致；若立場改變，是否清楚交代理由？</p></li>
+        <li><strong>檢視政見：準備怎麼做？</strong><p>閱讀選舉公報、政見全文與完整政見發表或辯論。除了口號，也看做法、預算、時程、職權與取捨，想想承諾是否可行。</p></li>
+        <li><strong>回看經歷：以前怎麼做？</strong><p>查證學經歷、過往工作與公共服務紀錄；曾任公職者，可再看施政、提案、表決與承諾落實情形。遇到爭議，也一起看原始資料、當事人回應與後續處理。</p></li>
+        <li><strong>參考網路討論：哪些值得查證？</strong><p>聽聽不同立場的提問，但不把聲量、按讚數或剪輯片段當成結論。追查出處、日期與完整脈絡，區分事實、評論與傳聞，再對照可信的獨立來源。</p></li>
+      </ol>
+      <p class="candidate-reminder">用同一套標準比較每位候選人，寫下你重視的議題、支持的理由與還待查證的問題。形象之外，讓紀錄與證據幫助你做自己的決定。</p>
+    </section>`;
+  }
   function innerVoice(card) { return `${card.note1}${card.note2}`; }
   function resolvedAction() {
     const card = selectedCard();
@@ -116,13 +129,12 @@
   function drawScreen() {
     const trio = currentTrio();
     const allRevealed = trio.every(card => state.revealed.has(card.number));
-    return flow(`${heading('CHAPTER 01 · THREE CARDS', '此刻最像你的，是哪一張？', '依序翻開三張牌。它們只是可能的鏡子，最後由你自己選。')}
+    return flow(`${heading('CHAPTER 01 · THREE CARDS', '此刻最像你的，是哪一張？', '輕觸任一張牌，三張一起翻開。它們只是可能的鏡子，最後由你自己選。')}
       <div class="draw-grid">${trio.map((card, index) => {
         const revealed = state.revealed.has(card.number);
-        const canReveal = index === 0 || state.revealed.has(trio[index - 1].number);
-        return `<div class="draw-slot"><button type="button" class="tarot-button" data-action="${revealed ? 'zoom' : 'reveal'}" data-id="${card.number}" ${!revealed && !canReveal ? 'disabled' : ''} aria-label="${revealed ? `放大${esc(card.zh)}牌卡` : canReveal ? `翻開第 ${index + 1} 張牌` : '請先翻開前一張牌'}">${revealed ? `<img width="958" height="1642" decoding="async" src="${cardPath(card)}" alt="${esc(card.zh)}選民情緒塔羅牌">` : `<span class="card-back"><span class="back-flower" aria-hidden="true">✦</span><span class="back-title">選民情緒塔羅</span></span>`}</button><p class="slot-number">CARD ${String(index + 1).padStart(2, '0')}</p>${revealed ? `<h2 class="slot-title">${esc(card.zh)}</h2><p class="slot-theme">${esc(card.theme)}</p>${allRevealed ? `<button type="button" class="choose-button ${state.selectedId === card.number ? 'chosen' : ''}" data-action="choose-card" data-id="${card.number}" aria-pressed="${state.selectedId === card.number}">${state.selectedId === card.number ? '✓ 已選這張' : '這張有感'}</button>` : ''}` : `<p class="slot-theme">${canReveal ? '輕觸，看看牌面' : '請先翻開前一張'}</p>`}</div>`;
+        return `<div class="draw-slot"><button type="button" class="tarot-button" data-action="${revealed ? 'zoom' : 'reveal'}" data-id="${card.number}" aria-label="${revealed ? `放大${esc(card.zh)}牌卡` : `點第 ${index + 1} 張牌，一起翻開三張牌`}">${revealed ? `<img width="958" height="1642" decoding="async" src="${cardPath(card)}" alt="${esc(card.zh)}選民情緒塔羅牌">` : `<span class="card-back"><span class="back-flower" aria-hidden="true">✦</span><span class="back-title">選民情緒塔羅</span></span>`}</button><p class="slot-number">CARD ${String(index + 1).padStart(2, '0')}</p>${revealed ? `<h2 class="slot-title">${esc(card.zh)}</h2><p class="slot-theme">${esc(card.theme)}</p>${allRevealed ? `<button type="button" class="choose-button ${state.selectedId === card.number ? 'chosen' : ''}" data-action="choose-card" data-id="${card.number}" aria-pressed="${state.selectedId === card.number}">${state.selectedId === card.number ? '✓ 已選這張' : '這張有感'}</button>` : ''}` : `<p class="slot-theme">輕觸，三張一起翻開</p>`}</div>`;
       }).join('')}</div>
-      <p class="helper">牌卡不會替你定義情緒。沒有一張有感，可以換一組。翻開後再次點牌面可放大閱讀。</p><p class="helper mobile-only">左右滑動，可以看見下一張牌。</p>
+      <p class="helper">牌卡不會替你定義情緒。沒有一張有感，可以換一組。翻開後再次點牌面可放大閱讀。</p>
       <div class="flow-actions between"><button class="ghost-button" type="button" data-action="back">← 返回首頁</button><div class="button-row"><button class="secondary-button" type="button" data-action="next-trio">換一組</button><button class="primary-button" type="button" data-action="to-reflection" ${!state.selectedId ? 'disabled' : ''}>下一步 <span aria-hidden="true">→</span></button></div></div>`);
   }
   function reflectionScreen() {
@@ -153,6 +165,7 @@
     return flow(`<div class="result-heading"><p class="eyebrow">YOUR MOMENT CARD</p><h1 tabindex="-1" id="stageTitle">謝謝你，為自己的反應停了一拍。</h1><p>不用評分，也不必逼自己立刻平靜。這是一張只屬於此刻的回顧卡。</p></div>
       <div class="result-card" id="resultCard"><img width="958" height="1642" decoding="async" src="${cardPath(card)}" alt="${esc(card.zh)}牌面"><div class="result-copy"><p class="eyebrow">選民情緒塔羅 · CARD ${String(card.number).padStart(2, '0')}</p><h2>${esc(card.zh)}</h2><blockquote>${esc(encouragements[card.number])}</blockquote>${resultLine('我對什麼不安', reflection)}${resultLine('給這個情緒的建議', nextStep(card))}${resultLine('我選的小行動', state.actionChoice === 'card' ? '試試上面給這個情緒的建議。' : resolvedAction())}<p class="tagline">選對的人，做對的事 ✦</p></div></div>
       ${judgmentGuide()}
+      ${candidateGuide()}
       <div class="flow-actions result-actions"><button type="button" class="ghost-button" data-action="back">← 返回選行動</button><button type="button" class="primary-button" data-action="download">下載回顧卡 PNG <span aria-hidden="true">↓</span></button><button type="button" class="secondary-button" data-action="restart">再走一次 ↺</button></div><p id="downloadStatus" class="helper" role="status">回顧卡只在你的裝置上產生，不會上傳反思文字。</p>`);
   }
   function render(options = {}) {
@@ -259,7 +272,7 @@
     if (action === 'restart') return reset();
     if (action === 'start') return go(1);
     if (action === 'close-zoom') return zoomDialog.close();
-    if (action === 'reveal') { state.revealed.add(Number(button.dataset.id)); return render({ keepScroll: true }); }
+    if (action === 'reveal') { currentTrio().forEach(card => state.revealed.add(card.number)); return render({ keepScroll: true }); }
     if (action === 'zoom') return showZoom(button.dataset.id);
     if (action === 'choose-card') {
       const id = Number(button.dataset.id);

@@ -129,6 +129,8 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 .judgment-guide h2{font-family:'Noto Serif TC',serif;font-size:22px;margin:0 0 14px}
 .judgment-guide ol{padding-left:24px;margin:0}.judgment-guide li+li{margin-top:14px}
 .judgment-guide strong{color:var(--gold-dark)}.judgment-guide li p{margin:3px 0 0;font-size:15px}
+.candidate-intro{margin:0 0 18px;font-size:16px;color:var(--red);font-family:'Noto Serif TC',serif}
+.candidate-reminder{border-top:1px solid var(--gold);padding-top:15px;margin:20px 0 0;font-size:15px}
 .result-card{align-items:start}.result-copy{min-width:0}
 
 dialog.modal{border:1px solid var(--gold-dark);background:var(--paper);color:var(--ink);box-shadow:0 22px 70px rgba(0,0,0,.28)}
@@ -155,10 +157,6 @@ dialog.modal::backdrop{background:rgba(13,27,43,.68)}
 @media(max-width:540px){
   .intro h1{font-size:36px}
   .corner{font-size:18px;opacity:.72}
-  .draw-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:58%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:5px;gap:12px;padding:5px 5px 18px;scrollbar-width:none}
-  .draw-grid::-webkit-scrollbar{display:none}
-  .draw-slot{scroll-snap-align:start}
-  .mobile-only{display:block;margin-top:-7px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen{animation:none}.primary-button,.secondary-button,.scene-option,.tarot-button{transition:none}}
 @media(max-width:540px){.result-card{grid-template-columns:1fr;padding:20px}.result-card img{width:130px;margin:auto}.result-copy h2{font-size:24px}.result-copy blockquote{font-size:17px}.result-copy .result-line{font-size:15px}.result-copy .result-line b{font-size:13px}.judgment-guide{padding:17px}.judgment-guide h2{font-size:20px}.action-choice small{font-size:14px}.helper{font-size:13px}}
