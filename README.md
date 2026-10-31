@@ -2,7 +2,13 @@
 
 以 38 張牌整理選舉時的感受，為自己的判斷停一拍。純 HTML、CSS 與 JavaScript，不需要安裝前端框架或連接後端。
 
-[目前正式網站](https://voter-emotion-tarot.i-seven7mail.chatgpt.site/)
+## 直接試玩
+
+**[▶ 開啟 GitHub Pages 測試網站](https://iseven7mail-create.github.io/voter-emotion-tarot/)**
+
+點選即可在瀏覽器抽牌、閱讀建議與下載 PNG 回顧卡，免安裝。
+
+[ChatGPT Sites 網站](https://voter-emotion-tarot.i-seven7mail.chatgpt.site/)
 
 ## 內容
 
@@ -37,7 +43,7 @@ python -m http.server 4173
 
 ## 部署
 
-整個資料夾可部署至支援靜態網站的服務。GitHub Pages 可使用 `main` 分支的根目錄，圖片採用相對路徑，可放在專案網址下。
+GitHub Pages 已設定從 `main` 分支的根目錄（`/`）發布。更新網站檔案並提交至 `main` 後，GitHub 會自動重新部署；進度可在專案的 Actions 頁面查看。圖片採用相對路徑，可放在專案網址下。
 
 本儲存庫包含網站程式與網頁版牌卡。高品質原始 PNG 另保留於原工作資料夾的 `highcards/`，不納入公開儲存庫。
 
